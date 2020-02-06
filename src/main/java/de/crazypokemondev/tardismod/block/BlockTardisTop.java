@@ -8,7 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockTardisTop extends AbstractTardisPartBlock {
-	private static final AxisAlignedBB TARDIS_AABB_TOP = new AxisAlignedBB(0.0D, -1.0D, 0.0D, 1.0D, 2.0D, 1.0D);
+	private static final AxisAlignedBB TARDIS_AABB_TOP = new AxisAlignedBB(0.0D, -1.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

@@ -36,7 +36,7 @@ public class TardisMod {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		LOGGER.info(TardisMod.NAME + "says hi!");
+		
 	}
 
 	@EventHandler

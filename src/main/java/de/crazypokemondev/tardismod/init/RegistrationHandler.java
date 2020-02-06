@@ -1,18 +1,25 @@
 package de.crazypokemondev.tardismod.init;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
-import de.crazypokemondev.tardismod.block.TardisInternalBlock;
+import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockTardis;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
+import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationFactory;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationStorage;
 import de.crazypokemondev.tardismod.worldgen.BiomeTardisInterior;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -22,12 +29,14 @@ import net.minecraftforge.registries.IForgeRegistry;
 @EventBusSubscriber(modid = TardisMod.MODID)
 public final class RegistrationHandler {
 
+	private static List<Item> blockItems = new ArrayList<Item>();
+
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event) {
 		TardisMod.LOGGER.info("Registering blocks");
 		final Block[] blocks = { createBlock(new BlockTardis(), "tardis"),
 				createBlock(new BlockTardisTop(), "tardis_top"), createBlock(new TardisInternalBlock(), "solid_block"),
-				createBlock(new TardisInternalBlock(), "solid_glass"),
+				createBlock(new BlockSolidGlass(), "solid_glass"),
 				createBlock(new TardisInternalBlock(), "flat_block") };
 
 		event.getRegistry().registerAll(blocks);
@@ -43,7 +52,8 @@ public final class RegistrationHandler {
 		TardisMod.LOGGER.info("Registering items");
 		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"),
 				createItem(new Item(), "kontron_crystal") };
-		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK) };
+		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.SOLID_GLASS),
+				createItemBlock(ModBlocks.FLAT_BLOCK) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);
@@ -54,8 +64,18 @@ public final class RegistrationHandler {
 				.setCreativeTab(TardisMod.CREATIVE_TAB);
 	}
 
-	private static Item createItemBlock(Block block) {
-		return new ItemBlock(block).setRegistryName(block.getRegistryName());
+	private static Item createItemBlock(final Block block) {
+		Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
+		blockItems.add(item);
+		return item;
+	}
+
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		for (Item item : blockItems) {
+			ModelLoader.setCustomModelResourceLocation(item, 0,
+					new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		}
 	}
 
 	@SubscribeEvent

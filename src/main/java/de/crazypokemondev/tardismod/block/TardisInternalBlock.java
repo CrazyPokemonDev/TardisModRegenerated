@@ -1,7 +1,13 @@
 package de.crazypokemondev.tardismod.block;
 
-import de.crazypokemondev.tardismod.block.base.AbstractTardisInternalBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 
-public class TardisInternalBlock extends AbstractTardisInternalBlock {
-	
+public class TardisInternalBlock extends Block {
+	public TardisInternalBlock() {
+		super(Material.IRON);
+		setSoundType(SoundType.METAL);
+		setBlockUnbreakable();
+	}
 }
