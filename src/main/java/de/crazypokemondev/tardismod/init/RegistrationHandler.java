@@ -1,0 +1,74 @@
+package de.crazypokemondev.tardismod.init;
+
+import de.crazypokemondev.tardismod.TardisMod;
+import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
+import de.crazypokemondev.tardismod.block.TardisInternalBlock;
+import de.crazypokemondev.tardismod.block.BlockTardis;
+import de.crazypokemondev.tardismod.block.BlockTardisTop;
+import de.crazypokemondev.tardismod.item.ItemTardisKey;
+import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationFactory;
+import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationStorage;
+import de.crazypokemondev.tardismod.worldgen.BiomeTardisInterior;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
+
+@EventBusSubscriber(modid = TardisMod.MODID)
+public final class RegistrationHandler {
+
+	@SubscribeEvent
+	public static void registerBlocks(Register<Block> event) {
+		TardisMod.LOGGER.info("Registering blocks");
+		final Block[] blocks = { createBlock(new BlockTardis(), "tardis"),
+				createBlock(new BlockTardisTop(), "tardis_top"), createBlock(new TardisInternalBlock(), "solid_block"),
+				createBlock(new TardisInternalBlock(), "solid_glass"),
+				createBlock(new TardisInternalBlock(), "flat_block") };
+
+		event.getRegistry().registerAll(blocks);
+	}
+
+	private static Block createBlock(Block block, String name) {
+		return block.setRegistryName(TardisMod.MODID, name).setUnlocalizedName(TardisMod.MODID + "." + name)
+				.setCreativeTab(TardisMod.CREATIVE_TAB);
+	}
+
+	@SubscribeEvent
+	public static void registerItems(Register<Item> event) {
+		TardisMod.LOGGER.info("Registering items");
+		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"),
+				createItem(new Item(), "kontron_crystal") };
+		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK) };
+
+		event.getRegistry().registerAll(items);
+		event.getRegistry().registerAll(itemBlocks);
+	}
+
+	private static Item createItem(Item item, String name) {
+		return item.setRegistryName(TardisMod.MODID, name).setUnlocalizedName(TardisMod.MODID + "." + name)
+				.setCreativeTab(TardisMod.CREATIVE_TAB);
+	}
+
+	private static Item createItemBlock(Block block) {
+		return new ItemBlock(block).setRegistryName(block.getRegistryName());
+	}
+
+	@SubscribeEvent
+	public static void registerBiomes(Register<Biome> event) {
+		final IForgeRegistry<Biome> registry = event.getRegistry();
+
+		TardisMod.LOGGER.info("Registering biomes");
+
+		registry.register(new BiomeTardisInterior().setRegistryName(TardisMod.MODID, ModWorldGen.TARDIS_NAME));
+	}
+
+	public static void registerCapabilities() {
+		CapabilityManager.INSTANCE.register(ITardisIdentificationCapability.class, new TardisIdentificationStorage(),
+				new TardisIdentificationFactory());
+	}
+}

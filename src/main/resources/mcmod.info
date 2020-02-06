@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tardismod",
+  "name": "Tardis Mod",
+  "description": "Adds a TARDIS to minecraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Olfi01"],
+  "credits": "DarkholmeTenk, for the original TARDIS mod for the 1.7.10",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

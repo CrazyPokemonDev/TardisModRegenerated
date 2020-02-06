@@ -1,0 +1,13 @@
+# Items
+item.tardismod.tardis_key.name=Tardis Key
+item.tardismod.kontron_crystal.name=Kontron Crystal
+
+# Blocks
+tile.tardismod.tardis.name=TARDIS
+tile.tardismod.tardis_top.name=TARDIS
+tile.tardismod.solid_block.name=Solid Block
+tile.tardismod.solid_glass.name=Glass
+tile.tardismod.flat_block.name=Flat Block
+
+# Misc
+itemGroup.tardismod=Tardis Mod

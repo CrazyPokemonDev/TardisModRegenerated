@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"# ",
+		"#X",
+		"##"
+	],
+	"key": {
+		"X": {
+			"item": "tardismod:kontron_crystal"
+		},
+		"#": {
+			"item": "minecraft:iron_ingot"
+		}
+	},
+	"result": {
+		"item": "tardismod:tardis_key"
+	}
+}

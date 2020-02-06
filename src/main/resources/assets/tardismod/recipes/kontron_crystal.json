@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"#X#",
+		"###"
+	],
+	"key": {
+		"X": {
+			"item": "minecraft:diamond_block"
+		},
+		"#": {
+			"item": "minecraft:ender_pearl"
+		}
+	},
+	"result": {
+		"item": "tardismod:kontron_crystal"
+	}
+}
