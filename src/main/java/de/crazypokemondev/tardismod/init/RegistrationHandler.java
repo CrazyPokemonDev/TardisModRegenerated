@@ -10,6 +10,7 @@ import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockTardis;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
+import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationFactory;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationStorage;
@@ -30,7 +31,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @EventBusSubscriber(modid = TardisMod.MODID)
 public final class RegistrationHandler {
 
-	private static List<Item> blockItems = new ArrayList<Item>();
+	private static List<Item> registerInventoryVariant = new ArrayList<Item>();
 
 	@SubscribeEvent
 	public static void registerBlocks(Register<Block> event) {
@@ -52,13 +53,17 @@ public final class RegistrationHandler {
 	@SubscribeEvent
 	public static void registerItems(Register<Item> event) {
 		TardisMod.LOGGER.info("Registering items");
+		Item sonicScrewdriver = createItem(new ItemSonicScrewdriver(), "sonic_screwdriver");
 		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"),
-				createItem(new Item(), "kontron_crystal") };
+				createItem(new Item(), "kontron_crystal"), sonicScrewdriver };
 		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.SOLID_GLASS),
 				createItemBlock(ModBlocks.FLAT_BLOCK), createItemBlock(ModBlocks.ROUNDEL) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);
+		
+		// register inventory variant for obj models of items
+		registerInventoryVariant.add(sonicScrewdriver);
 	}
 
 	private static Item createItem(Item item, String name) {
@@ -68,13 +73,13 @@ public final class RegistrationHandler {
 
 	private static Item createItemBlock(final Block block) {
 		Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
-		blockItems.add(item);
+		registerInventoryVariant.add(item);
 		return item;
 	}
 
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {
-		for (Item item : blockItems) {
+		for (Item item : registerInventoryVariant) {
 			ModelLoader.setCustomModelResourceLocation(item, 0,
 					new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}

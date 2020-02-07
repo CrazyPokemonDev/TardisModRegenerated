@@ -1,0 +1,28 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"custom": {
+			"flip-v": true
+		},
+		"model": "tardismod:screw.obj",
+		"textures": {
+			"#Default_OBJ.001": "tardismod:items/sonic_screwdriver"
+		},
+		"transform": {
+			"scale": 0.5,
+			"gui": {
+				"scale": 2
+			}
+		}
+	},
+	"variants": {
+		"inventory": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/blue"
+				}
+			}
+		]
+	}
+}

@@ -1,6 +1,7 @@
 # Items
 item.tardismod.tardis_key.name=Tardis Key
 item.tardismod.kontron_crystal.name=Kontron Crystal
+item.tardismod.sonic_screwdriver.name=Sonic Screwdriver
 
 # Blocks
 tile.tardismod.tardis.name=TARDIS
