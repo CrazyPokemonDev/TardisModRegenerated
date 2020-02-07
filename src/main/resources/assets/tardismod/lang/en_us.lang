@@ -10,6 +10,10 @@ tile.tardismod.solid_block.name=Solid Block
 tile.tardismod.flat_block.name=Flat Block
 tile.tardismod.solid_glass.name=Glass
 tile.tardismod.roundel.name=Roundel
+tile.tardismod.door.name=Door
+tile.tardismod.door_connector.name=Door
+tile.tardismod.solid_force_field.name=Solid Force Field
+tile.tardismod.solid_gravity_lift.name=Solid Gravity Lift
 
 # Misc
 itemGroup.tardismod=Tardis Mod

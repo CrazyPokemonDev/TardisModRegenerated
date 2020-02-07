@@ -5,7 +5,10 @@ import java.util.List;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
+import de.crazypokemondev.tardismod.block.BlockDoor;
+import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
+import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockTardis;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
@@ -38,9 +41,11 @@ public final class RegistrationHandler {
 		TardisMod.LOGGER.info("Registering blocks");
 		final Block[] blocks = { createBlock(new BlockTardis(), "tardis"),
 				createBlock(new BlockTardisTop(), "tardis_top"), createBlock(new TardisInternalBlock(), "solid_block"),
-				createBlock(new TardisInternalBlock(), "flat_block"),
-				createBlock(new BlockSolidGlass(), "solid_glass"),
-				createBlock(new BlockRoundel(), "roundel")};
+				createBlock(new TardisInternalBlock(), "flat_block"), createBlock(new BlockSolidGlass(), "solid_glass"),
+				createBlock(new BlockRoundel(), "roundel"), createBlock(new BlockDoor(), "door"),
+				createBlock(new BlockSolidForceField(), "solid_force_field"),
+				createBlock(new BlockSolidGravityLift(), "solid_gravity_lift"),
+				createBlock(new TardisInternalBlock(), "door_connector") };
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -54,14 +59,16 @@ public final class RegistrationHandler {
 	public static void registerItems(Register<Item> event) {
 		TardisMod.LOGGER.info("Registering items");
 		Item sonicScrewdriver = createItem(new ItemSonicScrewdriver(), "sonic_screwdriver");
-		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"),
-				createItem(new Item(), "kontron_crystal"), sonicScrewdriver };
-		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.SOLID_GLASS),
-				createItemBlock(ModBlocks.FLAT_BLOCK), createItemBlock(ModBlocks.ROUNDEL) };
+		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"), createItem(new Item(), "kontron_crystal"),
+				sonicScrewdriver };
+		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.FLAT_BLOCK),
+				createItemBlock(ModBlocks.SOLID_GLASS), createItemBlock(ModBlocks.ROUNDEL),
+				createItemBlock(ModBlocks.DOOR), createItemBlock(ModBlocks.SOLID_FORCE_FIELD),
+				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);
-		
+
 		// register inventory variant for obj models of items
 		registerInventoryVariant.add(sonicScrewdriver);
 	}

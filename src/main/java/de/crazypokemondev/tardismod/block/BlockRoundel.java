@@ -6,6 +6,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -20,17 +21,17 @@ public class BlockRoundel extends TardisInternalBlock implements IScrewable {
 	}
 
 	@Override
-	public boolean screw(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
+	public EnumActionResult screw(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
 			float hitY, float hitZ, ScrewdriverMode mode) {
 		IBlockState state = worldIn.getBlockState(pos);
 		if (mode == ScrewdriverMode.RECONFIGURE && !state.getValue(OPEN)) {
 			worldIn.setBlockState(pos, state.withProperty(OPEN, true));
-			return true;
+			return EnumActionResult.SUCCESS;
 		} else if (mode == ScrewdriverMode.DISMANTLE && state.getValue(OPEN)) {
 			worldIn.setBlockState(pos, state.withProperty(OPEN, false));
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.PASS;
 	}
 
 	@Override

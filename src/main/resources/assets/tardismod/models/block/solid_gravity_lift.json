@@ -1,0 +1,8 @@
+{
+   "parent": "block/orientable",
+   "textures": {
+       "top": "tardismod:blocks/solidgravitylift_top",
+       "front": "tardismod:blocks/solidgravitylift_side",
+       "side": "tardismod:blocks/solidgravitylift_side"
+   }
+}
