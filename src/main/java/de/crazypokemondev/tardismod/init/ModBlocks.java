@@ -14,7 +14,8 @@ public class ModBlocks {
 	public static final BlockTardisTop TARDIS_TOP = null;
 	
 	public static final TardisInternalBlock SOLID_BLOCK = null;
-	public static final Block SOLID_GLASS = null;
 	public static final Block FLAT_BLOCK = null;
+	public static final Block SOLID_GLASS = null;
+	public static final Block ROUNDEL = null;
 	
 }

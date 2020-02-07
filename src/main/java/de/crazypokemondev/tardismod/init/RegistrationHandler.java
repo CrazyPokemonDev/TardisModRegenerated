@@ -5,6 +5,7 @@ import java.util.List;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
+import de.crazypokemondev.tardismod.block.BlockRoundel;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockTardis;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
@@ -36,8 +37,9 @@ public final class RegistrationHandler {
 		TardisMod.LOGGER.info("Registering blocks");
 		final Block[] blocks = { createBlock(new BlockTardis(), "tardis"),
 				createBlock(new BlockTardisTop(), "tardis_top"), createBlock(new TardisInternalBlock(), "solid_block"),
+				createBlock(new TardisInternalBlock(), "flat_block"),
 				createBlock(new BlockSolidGlass(), "solid_glass"),
-				createBlock(new TardisInternalBlock(), "flat_block") };
+				createBlock(new BlockRoundel(), "roundel")};
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -53,7 +55,7 @@ public final class RegistrationHandler {
 		final Item[] items = { createItem(new ItemTardisKey(), "tardis_key"),
 				createItem(new Item(), "kontron_crystal") };
 		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.SOLID_GLASS),
-				createItemBlock(ModBlocks.FLAT_BLOCK) };
+				createItemBlock(ModBlocks.FLAT_BLOCK), createItemBlock(ModBlocks.ROUNDEL) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);
