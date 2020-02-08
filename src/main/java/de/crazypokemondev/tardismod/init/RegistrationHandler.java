@@ -6,10 +6,11 @@ import java.util.List;
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
 import de.crazypokemondev.tardismod.block.BlockDoor;
-import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
+import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
+import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
 import de.crazypokemondev.tardismod.block.BlockTardis;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
@@ -45,7 +46,9 @@ public final class RegistrationHandler {
 				createBlock(new BlockRoundel(), "roundel"), createBlock(new BlockDoor(), "door"),
 				createBlock(new BlockSolidForceField(), "solid_force_field"),
 				createBlock(new BlockSolidGravityLift(), "solid_gravity_lift"),
-				createBlock(new TardisInternalBlock(), "door_connector") };
+				createBlock(new TardisInternalBlock(), "door_connector"),
+				createBlock(new BlockExit(), "exit_top"),
+				createBlock(new BlockExit(), "exit_bottom") };
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -64,7 +67,8 @@ public final class RegistrationHandler {
 		final Item[] itemBlocks = { createItemBlock(ModBlocks.SOLID_BLOCK), createItemBlock(ModBlocks.FLAT_BLOCK),
 				createItemBlock(ModBlocks.SOLID_GLASS), createItemBlock(ModBlocks.ROUNDEL),
 				createItemBlock(ModBlocks.DOOR), createItemBlock(ModBlocks.SOLID_FORCE_FIELD),
-				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR) };
+				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR),
+				createItemBlock(ModBlocks.EXIT_TOP), createItemBlock(ModBlocks.EXIT_BOTTOM) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);

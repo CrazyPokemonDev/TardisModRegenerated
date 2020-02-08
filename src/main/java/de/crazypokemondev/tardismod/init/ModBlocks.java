@@ -2,6 +2,7 @@ package de.crazypokemondev.tardismod.init;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.block.BlockDoor;
+import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
@@ -25,5 +26,7 @@ public class ModBlocks {
 	public static final BlockSolidForceField SOLID_FORCE_FIELD = null;
 	public static final BlockSolidGravityLift SOLID_GRAVITY_LIFT = null;
 	public static final TardisInternalBlock DOOR_CONNECTOR = null;
+	public static final BlockExit EXIT_TOP = null;
+	public static final BlockExit EXIT_BOTTOM = null;
 	
 }

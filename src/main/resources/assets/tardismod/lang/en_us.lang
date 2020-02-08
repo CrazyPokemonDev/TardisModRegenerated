@@ -14,6 +14,8 @@ tile.tardismod.door.name=Door
 tile.tardismod.door_connector.name=Door
 tile.tardismod.solid_force_field.name=Solid Force Field
 tile.tardismod.solid_gravity_lift.name=Solid Gravity Lift
+tile.tardismod.exit_top.name=TARDIS Door
+tile.tardismod.exit_bottom.name=TARDIS Door
 
 # Misc
 itemGroup.tardismod=Tardis Mod
