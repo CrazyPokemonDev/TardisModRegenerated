@@ -1,14 +1,20 @@
 package de.crazypokemondev.tardismod.init;
 
 import de.crazypokemondev.tardismod.TardisMod;
+import de.crazypokemondev.tardismod.block.BlockConsole;
+import de.crazypokemondev.tardismod.block.BlockControlPanel;
 import de.crazypokemondev.tardismod.block.BlockDoor;
 import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
+import de.crazypokemondev.tardismod.block.BlockSchemaCore;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
 import de.crazypokemondev.tardismod.block.BlockTardis;
+import de.crazypokemondev.tardismod.block.BlockTardisCore;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
+import de.crazypokemondev.tardismod.block.BlockTemporalEngine;
+import de.crazypokemondev.tardismod.block.BlockTimeRotor;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
@@ -17,6 +23,10 @@ public class ModBlocks {
 	
 	public static final BlockTardis TARDIS = null;
 	public static final BlockTardisTop TARDIS_TOP = null;
+	public static final BlockConsole CONSOLE = null;
+	public static final BlockTimeRotor TIME_ROTOR = null;
+	public static final BlockTardisCore TARDIS_CORE = null;
+	public static final BlockTemporalEngine TEMPORAL_ENGINE = null;
 	
 	public static final TardisInternalBlock SOLID_BLOCK = null;
 	public static final TardisInternalBlock FLAT_BLOCK = null;
@@ -28,5 +38,7 @@ public class ModBlocks {
 	public static final TardisInternalBlock DOOR_CONNECTOR = null;
 	public static final BlockExit EXIT_TOP = null;
 	public static final BlockExit EXIT_BOTTOM = null;
+	public static final BlockControlPanel CONTROL_PANEL = null;
+	public static final BlockSchemaCore SCHEMA_CORE = null;
 	
 }

@@ -5,14 +5,20 @@ import java.util.List;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
+import de.crazypokemondev.tardismod.block.BlockConsole;
+import de.crazypokemondev.tardismod.block.BlockControlPanel;
 import de.crazypokemondev.tardismod.block.BlockDoor;
 import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
+import de.crazypokemondev.tardismod.block.BlockSchemaCore;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
 import de.crazypokemondev.tardismod.block.BlockTardis;
+import de.crazypokemondev.tardismod.block.BlockTardisCore;
 import de.crazypokemondev.tardismod.block.BlockTardisTop;
+import de.crazypokemondev.tardismod.block.BlockTemporalEngine;
+import de.crazypokemondev.tardismod.block.BlockTimeRotor;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
@@ -46,9 +52,12 @@ public final class RegistrationHandler {
 				createBlock(new BlockRoundel(), "roundel"), createBlock(new BlockDoor(), "door"),
 				createBlock(new BlockSolidForceField(), "solid_force_field"),
 				createBlock(new BlockSolidGravityLift(), "solid_gravity_lift"),
-				createBlock(new TardisInternalBlock(), "door_connector"),
-				createBlock(new BlockExit(), "exit_top"),
-				createBlock(new BlockExit(), "exit_bottom") };
+				createBlock(new TardisInternalBlock(), "door_connector"), createBlock(new BlockExit(), "exit_top"),
+				createBlock(new BlockExit(), "exit_bottom"), createBlock(new BlockConsole(), "console"),
+				createBlock(new BlockTimeRotor(), "time_rotor"), createBlock(new BlockTardisCore(), "tardis_core"),
+				createBlock(new BlockTemporalEngine(), "temporal_engine"),
+				createBlock(new BlockControlPanel(), "control_panel"),
+				createBlock(new BlockSchemaCore(), "schema_core") };
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -68,7 +77,8 @@ public final class RegistrationHandler {
 				createItemBlock(ModBlocks.SOLID_GLASS), createItemBlock(ModBlocks.ROUNDEL),
 				createItemBlock(ModBlocks.DOOR), createItemBlock(ModBlocks.SOLID_FORCE_FIELD),
 				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR),
-				createItemBlock(ModBlocks.EXIT_TOP), createItemBlock(ModBlocks.EXIT_BOTTOM) };
+				createItemBlock(ModBlocks.EXIT_TOP), createItemBlock(ModBlocks.EXIT_BOTTOM),
+				createItemBlock(ModBlocks.CONTROL_PANEL), createItemBlock(ModBlocks.SCHEMA_CORE) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);

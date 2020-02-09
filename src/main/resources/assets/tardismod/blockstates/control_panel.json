@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "tardismod:control_panel"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}
