@@ -26,7 +26,6 @@ public class BlockTardis extends AbstractTardisPartBlock implements ITileEntityP
 	
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		System.out.println(ModBlocks.TARDIS_TOP);
 		worldIn.setBlockState(pos.up(), ModBlocks.TARDIS_TOP.getDefaultState().withProperty(FACING, state.getValue(FACING)));
 		super.onBlockAdded(worldIn, pos, state);
 	}

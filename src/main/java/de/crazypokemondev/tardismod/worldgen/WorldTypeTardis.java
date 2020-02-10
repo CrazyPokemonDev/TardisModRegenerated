@@ -2,9 +2,7 @@ package de.crazypokemondev.tardismod.worldgen;
 
 import de.crazypokemondev.tardismod.init.ModBiomes;
 import de.crazypokemondev.tardismod.init.ModWorldGen;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
@@ -29,10 +27,5 @@ public class WorldTypeTardis extends WorldType{
 	@Override
 	public boolean canBeCreated() {
 		return false;
-	}
-
-	@Override
-	public int getSpawnFuzz(WorldServer world, MinecraftServer server) {
-		return 0;
 	}
 }

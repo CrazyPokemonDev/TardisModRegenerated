@@ -15,4 +15,6 @@ public class TardisConfig extends Configuration{
 	public static int TARDIS_DIMENSION_TYPE_ID = 12;
 	@Comment("Whether the TARDIS' dimension should be kept loaded")
 	public static boolean KEEP_DIMENSION_LOADED = true;
+	@Comment("The name of the default console room schematic.")
+	public static String DEFAULT_CONSOLE_ROOM = "tardisConsoleMain";
 }

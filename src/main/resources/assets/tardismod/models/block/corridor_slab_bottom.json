@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "tardismod:blocks/corridor_slab_top",
+        "top": "tardismod:blocks/corridor_slab_top",
+        "side": "tardismod:blocks/corridor_slab_side"
+    }
+}

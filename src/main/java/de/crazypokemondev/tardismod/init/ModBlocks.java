@@ -3,10 +3,11 @@ package de.crazypokemondev.tardismod.init;
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.block.BlockConsole;
 import de.crazypokemondev.tardismod.block.BlockControlPanel;
+import de.crazypokemondev.tardismod.block.BlockCorridorSlab;
 import de.crazypokemondev.tardismod.block.BlockDoor;
 import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
-import de.crazypokemondev.tardismod.block.BlockSchemaCore;
+import de.crazypokemondev.tardismod.block.BlockSchema;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
@@ -39,6 +40,7 @@ public class ModBlocks {
 	public static final BlockExit EXIT_TOP = null;
 	public static final BlockExit EXIT_BOTTOM = null;
 	public static final BlockControlPanel CONTROL_PANEL = null;
-	public static final BlockSchemaCore SCHEMA_CORE = null;
+	public static final BlockSchema SCHEMA = null;
+	public static final BlockCorridorSlab CORRIDOR_SLAB = null;
 	
 }

@@ -2,7 +2,13 @@ package de.crazypokemondev.tardismod.worldgen;
 
 import java.util.List;
 
+import de.crazypokemondev.tardismod.block.BlockDoor;
 import de.crazypokemondev.tardismod.init.ModBiomes;
+import de.crazypokemondev.tardismod.init.ModBlocks;
+import de.crazypokemondev.tardismod.util.handlers.TardisConfig;
+import de.crazypokemondev.tardismod.util.helpers.SchematicHelper;
+import de.crazypokemondev.tardismod.util.schematic.Schematic;
+import de.crazypokemondev.tardismod.util.schematic.SchematicBlockInfo;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,6 +22,7 @@ public class ChunkGeneratorTardis implements IChunkGenerator {
 
 	private ChunkPrimer chunkPrimer = new ChunkPrimer();
 	private World world;
+	private static final BlockPos CONSOLE_SCHEMA_CORE_POS = new BlockPos(0, 60, 0);
 
 	public ChunkGeneratorTardis(World worldIn) {
 		world = worldIn;
@@ -27,16 +34,31 @@ public class ChunkGeneratorTardis implements IChunkGenerator {
 		chunk.generateSkylightMap();
 		byte[] abyte = chunk.getBiomeArray();
 
-        for (int i = 0; i < abyte.length; ++i)
-        {
-            abyte[i] = (byte) Biome.getIdForBiome(ModBiomes.TARDIS);
-        }
+		for (int i = 0; i < abyte.length; ++i) {
+			abyte[i] = (byte) Biome.getIdForBiome(ModBiomes.TARDIS);
+		}
 		return chunk;
 	}
 
 	@Override
 	public void populate(int chunkX, int chunkZ) {
-		
+		if ((chunkX == -1 || chunkX == 0) && (chunkZ == -1 || chunkZ == 0)) {
+			generateConsoleRoom(chunkX, chunkZ);
+		}
+	}
+
+	private void generateConsoleRoom(int chunkX, int chunkZ) {
+		Schematic consoleRoom = SchematicHelper.getSchematic(TardisConfig.DEFAULT_CONSOLE_ROOM);
+		for (SchematicBlockInfo block : consoleRoom.getStorage()) {
+			BlockPos pos = block.getPosition();
+			if (pos.getX() >= (chunkX + 1) * 16 || pos.getX() < chunkX * 16 || pos.getZ() >= (chunkZ + 1) * 16
+					|| pos.getZ() < chunkZ * 16) {
+				continue;
+			}
+			world.setBlockState(CONSOLE_SCHEMA_CORE_POS.add(block.getPosition()), block.getBlockState());
+		}
+		world.setBlockState(CONSOLE_SCHEMA_CORE_POS.add(consoleRoom.getPrimaryDoor()),
+				ModBlocks.DOOR.getDefaultState().withProperty(BlockDoor.PRIMARY, true));
 	}
 
 	@Override

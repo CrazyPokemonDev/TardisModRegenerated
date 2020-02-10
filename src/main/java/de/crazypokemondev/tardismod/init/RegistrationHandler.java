@@ -7,10 +7,11 @@ import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
 import de.crazypokemondev.tardismod.block.BlockConsole;
 import de.crazypokemondev.tardismod.block.BlockControlPanel;
+import de.crazypokemondev.tardismod.block.BlockCorridorSlab;
 import de.crazypokemondev.tardismod.block.BlockDoor;
 import de.crazypokemondev.tardismod.block.BlockExit;
 import de.crazypokemondev.tardismod.block.BlockRoundel;
-import de.crazypokemondev.tardismod.block.BlockSchemaCore;
+import de.crazypokemondev.tardismod.block.BlockSchema;
 import de.crazypokemondev.tardismod.block.BlockSolidForceField;
 import de.crazypokemondev.tardismod.block.BlockSolidGlass;
 import de.crazypokemondev.tardismod.block.BlockSolidGravityLift;
@@ -56,8 +57,8 @@ public final class RegistrationHandler {
 				createBlock(new BlockExit(), "exit_bottom"), createBlock(new BlockConsole(), "console"),
 				createBlock(new BlockTimeRotor(), "time_rotor"), createBlock(new BlockTardisCore(), "tardis_core"),
 				createBlock(new BlockTemporalEngine(), "temporal_engine"),
-				createBlock(new BlockControlPanel(), "control_panel"),
-				createBlock(new BlockSchemaCore(), "schema_core") };
+				createBlock(new BlockControlPanel(), "control_panel"), createBlock(new BlockSchema(), "schema"),
+				createBlock(new BlockCorridorSlab(), "corridor_slab") };
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -78,7 +79,8 @@ public final class RegistrationHandler {
 				createItemBlock(ModBlocks.DOOR), createItemBlock(ModBlocks.SOLID_FORCE_FIELD),
 				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR),
 				createItemBlock(ModBlocks.EXIT_TOP), createItemBlock(ModBlocks.EXIT_BOTTOM),
-				createItemBlock(ModBlocks.CONTROL_PANEL), createItemBlock(ModBlocks.SCHEMA_CORE) };
+				createItemBlock(ModBlocks.CONTROL_PANEL), createItemBlock(ModBlocks.SCHEMA),
+				createItemBlock(ModBlocks.CORRIDOR_SLAB) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);

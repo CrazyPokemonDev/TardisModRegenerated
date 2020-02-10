@@ -5,6 +5,7 @@
     },
     "variants": {
         "normal": [{}],
-        "inventory": [{}]
+        "inventory": [{}],
+        "primary": { "true": { "model": "tardismod:door_primary" }, "false": {} }
     }
 }

@@ -43,6 +43,10 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
 			playerIn.sendMessage(new TextComponentString("The door of the TARDIS seems to be mysteriously locked."));
+		/*if (!worldIn.isRemote) {
+			Teleport.teleportToDimension(playerIn, TardisMod.TARDIS_DIM_ID, 13, 68, 0);
+			return true;
+		}*/
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 
