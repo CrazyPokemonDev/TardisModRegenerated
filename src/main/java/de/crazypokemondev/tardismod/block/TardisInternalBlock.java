@@ -9,5 +9,6 @@ public class TardisInternalBlock extends Block {
 		super(Material.IRON);
 		setSoundType(SoundType.METAL);
 		setBlockUnbreakable();
+		setLightLevel(1.0F);
 	}
 }

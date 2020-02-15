@@ -20,3 +20,8 @@ tile.tardismod.corridor_slab.name=Corridor Slab
 
 # Misc
 itemGroup.tardismod=Tardis Mod
+
+# Messages
+messages.tardismod.tardis_cant_spawn_no_space=There's not enough room for the TARDIS to land here!
+messages.tardismod.tardis_spawn_successful=The key feels warm in your hand.
+messages.tardismod.tardis_doors_locked=The door of the TARDIS seems to be mysteriously locked.

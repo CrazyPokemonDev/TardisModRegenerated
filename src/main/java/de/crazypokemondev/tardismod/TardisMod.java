@@ -5,12 +5,10 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.crazypokemondev.tardismod.init.ModWorldGen;
 import de.crazypokemondev.tardismod.init.RegistrationHandler;
 import de.crazypokemondev.tardismod.tabs.TardisModTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.obj.OBJLoader;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -25,7 +23,6 @@ public class TardisMod {
 	public static final String NAME = "Tardis Mod";
 	public static final String VERSION = "0.0.1";
 	public static final String MC_VERSION = "[1.12.2]";
-	public static int TARDIS_DIM_ID;
 	public static File SCHEMA_DIR;
 
 	public static final Logger LOGGER = LogManager.getLogger(TardisMod.MODID);
@@ -35,11 +32,12 @@ public class TardisMod {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		RegistrationHandler.registerCapabilities();
+		RegistrationHandler.registerTileEntities();
+		
+		// enable OBJ models for rendering
 		OBJLoader.INSTANCE.addDomain(MODID);
 		
-		TARDIS_DIM_ID = DimensionManager.getNextFreeDimId();
-		DimensionManager.registerDimension(TARDIS_DIM_ID, ModWorldGen.TARDIS_DIM_TYPE);
-		
+		// Create Schema directory for TARDIS interior
 		SCHEMA_DIR = new File(event.getModConfigurationDirectory(), "tardismod_schemas/");
 		SCHEMA_DIR.mkdirs();
 	}

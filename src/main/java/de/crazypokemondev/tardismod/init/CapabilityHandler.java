@@ -4,10 +4,12 @@ import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationCapabilityProvider;
+import de.crazypokemondev.tardismod.util.capabilities.TardisLocationCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber(modid = TardisMod.MODID)
 public class CapabilityHandler {
 	public static final ResourceLocation TARDIS_ID_CAP = new ResourceLocation(TardisMod.MODID, "tardisIdCap");
+	private static final ResourceLocation TARDIS_LOCATION_CAP = new ResourceLocation(TardisMod.MODID, "tardisLocationCap");
 
 	@SubscribeEvent
 	public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
@@ -29,6 +32,11 @@ public class CapabilityHandler {
 		if (event.getObject() instanceof TileEntityTardis) {
 			event.addCapability(TARDIS_ID_CAP, new TardisIdentificationCapabilityProvider());
 		}
+	}
+	
+	@SubscribeEvent
+	public static void attachWorldCapabilities(AttachCapabilitiesEvent<World> event) {
+		event.addCapability(TARDIS_LOCATION_CAP, new TardisLocationCapabilityProvider());
 	}
 	
 	/**
