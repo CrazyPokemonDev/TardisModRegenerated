@@ -13,21 +13,22 @@ public abstract class AbstractDirectionalBlock extends BlockHorizontal {
 		super(materialIn);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
+
 	public AbstractDirectionalBlock(Material materialIn, MapColor mapColorIn) {
 		super(materialIn, mapColorIn);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
-	
+
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}
-	
+
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+		return ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));

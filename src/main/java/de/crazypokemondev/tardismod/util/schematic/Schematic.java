@@ -73,19 +73,20 @@ public class Schematic {
 		for (String key : storageTag.getKeySet()) {
 			storage[i++] = SchematicBlockInfo.loadFromNbt(getBlockPos(key), storageTag.getCompoundTag(key));
 		}
-		
+
 		String name = nbt.getString(NAME);
 		BlockPos primaryDoor = getBlockPos(nbt.getString(PRIMARY_DOOR));
 		int primaryDoorFace = nbt.getInteger(PRIMARY_DOOR_FACE);
 		int[] bounds = nbt.getIntArray(BOUNDS);
-		
+
 		return new Schematic(doors, storage, name, primaryDoor, primaryDoorFace, bounds);
 	}
 
 	private static BlockPos getBlockPos(String string) throws InvalidFormatException {
 		String[] split = string.split(",");
-		if (split.length < 3)
+		if (split.length < 3) {
 			throw new InvalidFormatException();
+		}
 		try {
 			int x = Integer.parseInt(split[0]);
 			int y = Integer.parseInt(split[1]);

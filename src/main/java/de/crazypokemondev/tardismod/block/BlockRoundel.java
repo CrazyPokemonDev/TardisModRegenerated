@@ -1,6 +1,5 @@
 package de.crazypokemondev.tardismod.block;
 
-import de.crazypokemondev.tardismod.api.IScrewable;
 import de.crazypokemondev.tardismod.api.ScrewdriverMode;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -12,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockRoundel extends TardisInternalBlock implements IScrewable {
+public class BlockRoundel extends TardisInternalBlock {
 
 	public static final PropertyBool OPEN = PropertyBool.create("open");
 
@@ -20,7 +19,6 @@ public class BlockRoundel extends TardisInternalBlock implements IScrewable {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(OPEN, false));
 	}
 
-	@Override
 	public EnumActionResult screw(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
 			float hitY, float hitZ, ScrewdriverMode mode) {
 		IBlockState state = worldIn.getBlockState(pos);

@@ -28,8 +28,9 @@ public class TardisIdentificationStorage implements IStorage<ITardisIdentificati
 	@Override
 	public void readNBT(Capability<ITardisIdentificationCapability> capability,
 			ITardisIdentificationCapability instance, EnumFacing side, NBTBase nbt) {
-		if (!(nbt instanceof NBTTagCompound))
+		if (!(nbt instanceof NBTTagCompound)) {
 			return;
+		}
 		NBTTagCompound nbtc = (NBTTagCompound) nbt;
 		if (nbtc.getBoolean(HAS_TARDIS) && nbtc.hasKey(TARDIS_DIMENSION_ID, NBT.TAG_INT)) {
 			instance.setTardisDimensionId(nbtc.getInteger(TARDIS_DIMENSION_ID));

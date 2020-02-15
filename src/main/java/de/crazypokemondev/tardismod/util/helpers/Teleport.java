@@ -11,26 +11,29 @@ import net.minecraft.world.WorldServer;
 public class Teleport extends Teleporter {
 
 	public final WorldServer world;
-	private double x, y, z;
+	private double posX;
+	private double posY;
+	private double posZ;
 
 	public Teleport(WorldServer world, double x, double y, double z) {
 		super(world);
 		this.world = world;
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.posX = x;
+		this.posY = y;
+		this.posZ = z;
 	}
 
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		this.world.getBlockState(new BlockPos((int) x, (int) y, (int) z));
-		entityIn.setPosition(x, y, z);
+		this.world.getBlockState(new BlockPos((int) posX, (int) posY, (int) posZ));
+		entityIn.setPosition(posX, posY, posZ);
 		entityIn.motionX = 0f;
 		entityIn.motionY = 0f;
 		entityIn.motionZ = 0f;
 	}
 
-	public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z, float yaw, float pitch) {
+	public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z, float yaw,
+			float pitch) {
 		EntityPlayerMP entityPlayerMp = (EntityPlayerMP) player;
 		MinecraftServer server = player.getEntityWorld().getMinecraftServer();
 		WorldServer worldServer = server.getWorld(dimension);

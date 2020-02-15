@@ -21,8 +21,9 @@ public class TardisLocationCapability implements ITardisLocationCapability {
 
 	@Override
 	public void setLocation(int tardisDimensionId, BlockPos position) {
-		if (position != null)
+		if (position != null) {
 			tardisLocations.put(tardisDimensionId, position);
+		}
 	}
 
 	@Override

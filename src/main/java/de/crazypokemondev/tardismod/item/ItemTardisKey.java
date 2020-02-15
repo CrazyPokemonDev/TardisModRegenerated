@@ -41,12 +41,7 @@ public class ItemTardisKey extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (handIn == EnumHand.MAIN_HAND && !worldIn.isRemote) {
 			ItemStack key = playerIn.getHeldItem(handIn);
-			if (key.getTagCompound() == null)
-				key.setTagCompound(new NBTTagCompound());
-			if (!key.getTagCompound().hasUniqueId(OWNER_UUID)) {
-				key.getTagCompound().setUniqueId(OWNER_UUID, playerIn.getUniqueID());
-			}
-			UUID ownerUuid = key.getTagCompound().getUniqueId(OWNER_UUID);
+			UUID ownerUuid = getOrSetOwnerUuid(playerIn, key);
 			EntityPlayer owner = worldIn.getPlayerEntityByUUID(ownerUuid);
 			int connectedDimensionId;
 			if (owner == null) {
@@ -70,18 +65,33 @@ public class ItemTardisKey extends Item {
 			if (cap.isMaterialized(connectedDimensionId)) {
 				return new ActionResult<ItemStack>(EnumActionResult.PASS, key);
 			}
-			EnumFacing playerFacing = CalculationHelper.getDirectionFromYaw(playerIn.rotationYaw);
-			BlockPos posToSpawnTardis = getFreeDoubleBlockPosAroundPosition(playerIn.getPosition(), worldIn,
-					playerFacing);
-			if (posToSpawnTardis == null) {
-				MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_CANT_SPAWN_NO_SPACE);
-				return new ActionResult<ItemStack>(EnumActionResult.FAIL, key);
-			}
-			TardisHelper.moveTardisTo(worldIn, posToSpawnTardis, connectedDimensionId, cap);
-			MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_SPAWN_SUCCESSFUL);
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, key);
+			return spawnTardisIfPossible(worldIn, playerIn, key, connectedDimensionId, cap);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
+
+	public ActionResult<ItemStack> spawnTardisIfPossible(World worldIn, EntityPlayer playerIn, ItemStack key,
+			int connectedDimensionId, ITardisLocationCapability cap) {
+		EnumFacing playerFacing = CalculationHelper.getDirectionFromYaw(playerIn.rotationYaw);
+		BlockPos posToSpawnTardis = getFreeDoubleBlockPosAroundPosition(playerIn.getPosition(), worldIn, playerFacing);
+		if (posToSpawnTardis == null) {
+			MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_CANT_SPAWN_NO_SPACE);
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, key);
+		}
+		TardisHelper.moveTardisTo(worldIn, posToSpawnTardis, connectedDimensionId, cap);
+		MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_SPAWN_SUCCESSFUL);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, key);
+	}
+
+	public UUID getOrSetOwnerUuid(EntityPlayer playerIn, ItemStack key) {
+		if (key.getTagCompound() == null) {
+			key.setTagCompound(new NBTTagCompound());
+		}
+		if (!key.getTagCompound().hasUniqueId(OWNER_UUID)) {
+			key.getTagCompound().setUniqueId(OWNER_UUID, playerIn.getUniqueID());
+		}
+		UUID ownerUuid = key.getTagCompound().getUniqueId(OWNER_UUID);
+		return ownerUuid;
 	}
 
 	private BlockPos getFreeDoubleBlockPosAroundPosition(BlockPos position, World worldIn,
