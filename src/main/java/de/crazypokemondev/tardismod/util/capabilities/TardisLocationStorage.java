@@ -37,12 +37,14 @@ public class TardisLocationStorage implements IStorage<ITardisLocationCapability
 	@Override
 	public void readNBT(Capability<ITardisLocationCapability> capability, ITardisLocationCapability instance,
 			EnumFacing side, NBTBase nbt) {
-		if (!(nbt instanceof NBTBase))
+		if (!(nbt instanceof NBTBase)) {
 			return;
+		}
 		NBTTagCompound tag = (NBTTagCompound) nbt;
 		for (String key : tag.getKeySet()) {
-			if (!tag.hasKey(key, NBT.TAG_INT_ARRAY))
+			if (!tag.hasKey(key, NBT.TAG_INT_ARRAY)) {
 				continue;
+			}
 			int[] array = tag.getIntArray(key);
 			try {
 				int dimensionId = Integer.parseInt(key);

@@ -6,5 +6,5 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(TardisMod.MODID)
 public class ModBiomes {
-	public final static BiomeTardisInterior TARDIS = null;
+	public static final BiomeTardisInterior TARDIS = null;
 }

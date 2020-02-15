@@ -22,8 +22,9 @@ public class CapabilityHandler {
 
 	@SubscribeEvent
 	public static void attachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (!(event.getObject() instanceof EntityPlayer))
+		if (!(event.getObject() instanceof EntityPlayer)) {
 			return;
+		}
 		event.addCapability(TARDIS_ID_CAP, new TardisIdentificationCapabilityProvider());
 	}
 
@@ -44,7 +45,9 @@ public class CapabilityHandler {
 	 */
 	@SubscribeEvent
 	public void onPlayerClone(PlayerEvent.Clone event) {
-		if (!event.isWasDeath()) return;
+		if (!event.isWasDeath()) {
+			return;
+		}
 		EntityPlayer player = event.getEntityPlayer();
 		ITardisIdentificationCapability newCap = player
 				.getCapability(TardisIdentificationCapabilityProvider.TARDIS_ID_CAP, null);

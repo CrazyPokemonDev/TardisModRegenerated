@@ -47,8 +47,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber(modid = TardisMod.MODID)
 public final class RegistrationHandler {
-	
-	private static final ResourceLocation TARDIS_TILE_ENTITY = new ResourceLocation(TardisMod.MODID, "tardisTileEntity");
+
+	private static final ResourceLocation TARDIS_TILE_ENTITY = new ResourceLocation(TardisMod.MODID,
+			"tardisTileEntity");
 
 	private static List<Item> registerInventoryVariant = new ArrayList<Item>();
 
@@ -128,9 +129,10 @@ public final class RegistrationHandler {
 	public static void registerCapabilities() {
 		CapabilityManager.INSTANCE.register(ITardisIdentificationCapability.class, new TardisIdentificationStorage(),
 				new TardisIdentificationFactory());
-		CapabilityManager.INSTANCE.register(ITardisLocationCapability.class, new TardisLocationStorage(), new TardisLocationFactory());
+		CapabilityManager.INSTANCE.register(ITardisLocationCapability.class, new TardisLocationStorage(),
+				new TardisLocationFactory());
 	}
-	
+
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, TARDIS_TILE_ENTITY);
 	}

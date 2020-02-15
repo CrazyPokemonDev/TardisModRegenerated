@@ -22,9 +22,9 @@ public class SchematicHelper {
 	private static Map<String, Schematic> schematicCache = new HashMap<>();
 
 	public static Schematic getSchematic(String name) {
-		if (schematicCache.containsKey(name))
+		if (schematicCache.containsKey(name)) {
 			return schematicCache.get(name);
-		else {
+		} else {
 			Schematic schem = loadSchematicFromFile(name);
 			schematicCache.put(name, schem);
 			return schem;

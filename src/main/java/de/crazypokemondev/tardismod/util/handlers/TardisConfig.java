@@ -7,8 +7,8 @@ import net.minecraftforge.common.config.Config.RangeInt;
 import net.minecraftforge.common.config.Configuration;
 
 @Config(modid = TardisMod.MODID)
-public class TardisConfig extends Configuration{
-	
+public class TardisConfig extends Configuration {
+
 	// Dimension
 	@RangeInt(max = 500, min = -500)
 	@Comment("The ID for the TARDIS dimension type")

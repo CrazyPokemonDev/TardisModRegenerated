@@ -7,14 +7,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TardisModTab extends CreativeTabs{
+public class TardisModTab extends CreativeTabs {
 	public TardisModTab() {
-        super(TardisMod.MODID);
-    }
- 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ItemStack getTabIconItem() {
-        return new ItemStack(ModItems.TARDIS_KEY);
-    }
+		super(TardisMod.MODID);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public ItemStack getTabIconItem() {
+		return new ItemStack(ModItems.TARDIS_KEY);
+	}
 }

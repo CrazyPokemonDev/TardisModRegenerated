@@ -65,10 +65,11 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 			if (!(te instanceof TileEntityTardis)) {
 				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 			}
-			TileEntityTardis tardis = (TileEntityTardis)te;
+			TileEntityTardis tardis = (TileEntityTardis) te;
 			ITardisIdentificationCapability tardisCap = tardis.getCapability(TARDIS_IDENTIFICATION_CAPABILITY, facing);
 			if (!tardisCap.hasTardis()) {
-				ITardisIdentificationCapability playerCap = playerIn.getCapability(TARDIS_IDENTIFICATION_CAPABILITY, null);
+				ITardisIdentificationCapability playerCap = playerIn.getCapability(TARDIS_IDENTIFICATION_CAPABILITY,
+						null);
 				if (!playerCap.hasTardis()) {
 					int dimensionId = TardisHelper.generateNewTardisDim();
 					playerCap.setTardisDimensionId(dimensionId);

@@ -8,22 +8,22 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class WorldTypeTardis extends WorldType{
+public class WorldTypeTardis extends WorldType {
 
 	public WorldTypeTardis() {
 		super(ModWorldGen.TARDIS_NAME);
 	}
-	
+
 	@Override
 	public BiomeProvider getBiomeProvider(World world) {
 		return new BiomeProviderSingle(ModBiomes.TARDIS);
 	}
-	
+
 	@Override
 	public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
 		return new ChunkGeneratorTardis(world);
 	}
-	
+
 	@Override
 	public boolean canBeCreated() {
 		return false;
