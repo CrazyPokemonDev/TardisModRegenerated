@@ -2,10 +2,10 @@ package de.crazypokemondev.tardismod.init;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
-import de.crazypokemondev.tardismod.api.ITardisLocationCapability;
 import de.crazypokemondev.tardismod.block.BlockConsole;
 import de.crazypokemondev.tardismod.block.BlockControlPanel;
 import de.crazypokemondev.tardismod.block.BlockCorridorSlab;
@@ -25,21 +25,25 @@ import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
 import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
+import de.crazypokemondev.tardismod.util.TardisModData;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationFactory;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationStorage;
-import de.crazypokemondev.tardismod.util.capabilities.TardisLocationFactory;
-import de.crazypokemondev.tardismod.util.capabilities.TardisLocationStorage;
 import de.crazypokemondev.tardismod.worldgen.BiomeTardisInterior;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -67,7 +71,8 @@ public final class RegistrationHandler {
 				createBlock(new BlockTimeRotor(), "time_rotor"), createBlock(new BlockTardisCore(), "tardis_core"),
 				createBlock(new BlockTemporalEngine(), "temporal_engine"),
 				createBlock(new BlockControlPanel(), "control_panel"), createBlock(new BlockSchema(), "schema"),
-				createBlock(new BlockCorridorSlab(), "corridor_slab") };
+				createBlock(new BlockCorridorSlab.Half(), "corridor_slab_half"),
+				createBlock(new BlockCorridorSlab.Double(), "corridor_slab_double") };
 
 		event.getRegistry().registerAll(blocks);
 	}
@@ -89,7 +94,7 @@ public final class RegistrationHandler {
 				createItemBlock(ModBlocks.SOLID_GRAVITY_LIFT), createItemBlock(ModBlocks.DOOR_CONNECTOR),
 				createItemBlock(ModBlocks.EXIT_TOP), createItemBlock(ModBlocks.EXIT_BOTTOM),
 				createItemBlock(ModBlocks.CONTROL_PANEL), createItemBlock(ModBlocks.SCHEMA),
-				createItemBlock(ModBlocks.CORRIDOR_SLAB) };
+				createItemSlab(ModBlocks.CORRIDOR_SLAB_HALF, ModBlocks.CORRIDOR_SLAB_DOUBLE) };
 
 		event.getRegistry().registerAll(items);
 		event.getRegistry().registerAll(itemBlocks);
@@ -105,6 +110,13 @@ public final class RegistrationHandler {
 
 	private static Item createItemBlock(final Block block) {
 		Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
+		registerInventoryVariant.add(item);
+		return item;
+	}
+
+	private static ItemSlab createItemSlab(BlockSlab halfBlock, BlockSlab doubleBlock) {
+		ItemSlab item = (ItemSlab) new ItemSlab(halfBlock, halfBlock, doubleBlock)
+				.setRegistryName(halfBlock.getRegistryName());
 		registerInventoryVariant.add(item);
 		return item;
 	}
@@ -129,11 +141,23 @@ public final class RegistrationHandler {
 	public static void registerCapabilities() {
 		CapabilityManager.INSTANCE.register(ITardisIdentificationCapability.class, new TardisIdentificationStorage(),
 				new TardisIdentificationFactory());
-		CapabilityManager.INSTANCE.register(ITardisLocationCapability.class, new TardisLocationStorage(),
-				new TardisLocationFactory());
 	}
 
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, TARDIS_TILE_ENTITY);
+	}
+
+	@SubscribeEvent
+	public static void loadWorld(WorldEvent.Load event) {
+		World world = event.getWorld();
+		// register dimension for every TARDIS in this world
+		TardisMod.LOGGER
+				.info("Loading TARDIS dimensions associated to world " + world.provider.getDimension());
+		Set<Integer> dimIds = TardisModData.get(world).getAllLocations().keySet();
+		for (int dimId : dimIds) {
+			if (!DimensionManager.isDimensionRegistered(dimId)) {
+				DimensionManager.registerDimension(dimId, ModWorldGen.TARDIS_DIM_TYPE);
+			}
+		}
 	}
 }

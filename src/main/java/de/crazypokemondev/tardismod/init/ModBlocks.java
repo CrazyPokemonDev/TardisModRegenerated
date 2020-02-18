@@ -21,14 +21,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(TardisMod.MODID)
 public class ModBlocks {
-	
+
 	public static final BlockTardis TARDIS = null;
 	public static final BlockTardisTop TARDIS_TOP = null;
 	public static final BlockConsole CONSOLE = null;
 	public static final BlockTimeRotor TIME_ROTOR = null;
 	public static final BlockTardisCore TARDIS_CORE = null;
 	public static final BlockTemporalEngine TEMPORAL_ENGINE = null;
-	
+
 	public static final TardisInternalBlock SOLID_BLOCK = null;
 	public static final TardisInternalBlock FLAT_BLOCK = null;
 	public static final BlockSolidGlass SOLID_GLASS = null;
@@ -41,6 +41,7 @@ public class ModBlocks {
 	public static final BlockExit EXIT_BOTTOM = null;
 	public static final BlockControlPanel CONTROL_PANEL = null;
 	public static final BlockSchema SCHEMA = null;
-	public static final BlockCorridorSlab CORRIDOR_SLAB = null;
-	
+	public static final BlockCorridorSlab.Half CORRIDOR_SLAB_HALF = null;
+	public static final BlockCorridorSlab.Double CORRIDOR_SLAB_DOUBLE = null;
+
 }

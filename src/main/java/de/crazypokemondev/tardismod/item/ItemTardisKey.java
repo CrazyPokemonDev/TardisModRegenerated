@@ -3,7 +3,9 @@ package de.crazypokemondev.tardismod.item;
 import java.util.UUID;
 
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
-import de.crazypokemondev.tardismod.api.ITardisLocationCapability;
+import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
+import de.crazypokemondev.tardismod.init.ModWorldGen;
+import de.crazypokemondev.tardismod.util.TardisModData;
 import de.crazypokemondev.tardismod.util.helpers.CalculationHelper;
 import de.crazypokemondev.tardismod.util.helpers.MessageHelper;
 import de.crazypokemondev.tardismod.util.helpers.TardisHelper;
@@ -12,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -34,12 +37,11 @@ public class ItemTardisKey extends Item {
 
 	@CapabilityInject(ITardisIdentificationCapability.class)
 	static Capability<ITardisIdentificationCapability> TARDIS_IDENTIFICATION_CAPABILITY = null;
-	@CapabilityInject(ITardisLocationCapability.class)
-	static Capability<ITardisLocationCapability> TARDIS_LOCATION_CAPABILITY = null;
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		if (handIn == EnumHand.MAIN_HAND && !worldIn.isRemote) {
+		if (handIn == EnumHand.MAIN_HAND && !worldIn.isRemote
+				&& worldIn.provider.getDimensionType() != ModWorldGen.TARDIS_DIM_TYPE) {
 			ItemStack key = playerIn.getHeldItem(handIn);
 			UUID ownerUuid = getOrSetOwnerUuid(playerIn, key);
 			EntityPlayer owner = worldIn.getPlayerEntityByUUID(ownerUuid);
@@ -61,24 +63,31 @@ public class ItemTardisKey extends Item {
 			}
 			key.getTagCompound().setInteger(DIMENSION_ID, connectedDimensionId);
 
-			ITardisLocationCapability cap = worldIn.getCapability(TARDIS_LOCATION_CAPABILITY, null);
-			if (cap.isMaterialized(connectedDimensionId)) {
+			if (TardisModData.get(worldIn).exists(connectedDimensionId)) {
 				return new ActionResult<ItemStack>(EnumActionResult.PASS, key);
 			}
-			return spawnTardisIfPossible(worldIn, playerIn, key, connectedDimensionId, cap);
+			return spawnTardisIfPossible(worldIn, playerIn, key, connectedDimensionId);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 	public ActionResult<ItemStack> spawnTardisIfPossible(World worldIn, EntityPlayer playerIn, ItemStack key,
-			int connectedDimensionId, ITardisLocationCapability cap) {
+			int connectedDimensionId) {
 		EnumFacing playerFacing = CalculationHelper.getDirectionFromYaw(playerIn.rotationYaw);
 		BlockPos posToSpawnTardis = getFreeDoubleBlockPosAroundPosition(playerIn.getPosition(), worldIn, playerFacing);
 		if (posToSpawnTardis == null) {
 			MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_CANT_SPAWN_NO_SPACE);
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, key);
 		}
-		TardisHelper.moveTardisTo(worldIn, posToSpawnTardis, connectedDimensionId, cap);
+
+		TardisHelper.moveTardisTo(worldIn, posToSpawnTardis, connectedDimensionId,
+				playerIn.getHorizontalFacing().getOpposite());
+
+		TileEntity te = worldIn.getTileEntity(posToSpawnTardis);
+		TileEntityTardis tardis = (TileEntityTardis) te;
+		ITardisIdentificationCapability cap = tardis.getCapability(TARDIS_IDENTIFICATION_CAPABILITY, null);
+		cap.setTardisDimensionId(connectedDimensionId);
+
 		MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_SPAWN_SUCCESSFUL);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, key);
 	}

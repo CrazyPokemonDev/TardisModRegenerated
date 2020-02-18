@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "tardismod:corridor_slab"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "variant": {
+        	"default": { "model": "tardismod:corridor_slab_double" }
+        }
+    }
+}

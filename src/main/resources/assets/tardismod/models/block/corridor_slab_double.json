@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "tardismod:blocks/corridor_slab_top",
+        "side": "tardismod:blocks/corridor_slab_side"
+    }
+}

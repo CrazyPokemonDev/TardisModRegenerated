@@ -1,17 +1,22 @@
 package de.crazypokemondev.tardismod.util.helpers;
 
-import de.crazypokemondev.tardismod.api.ITardisLocationCapability;
 import de.crazypokemondev.tardismod.init.ModBlocks;
 import de.crazypokemondev.tardismod.init.ModWorldGen;
+import de.crazypokemondev.tardismod.util.TardisLocation;
+import de.crazypokemondev.tardismod.util.TardisModData;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
 public class TardisHelper {
-	
-	public static void moveTardisTo(World worldIn, BlockPos position, int tardisDimensionId, ITardisLocationCapability cap) {
-		worldIn.setBlockState(position, ModBlocks.TARDIS.getDefaultState());
-		cap.setLocation(tardisDimensionId, position);
+
+	public static void moveTardisTo(World worldIn, BlockPos position, int tardisDimensionId, EnumFacing facing) {
+		worldIn.setBlockState(position,
+				ModBlocks.TARDIS.getDefaultState().withProperty(BlockHorizontal.FACING, facing));
+		TardisModData.get(worldIn).setLocation(tardisDimensionId,
+				new TardisLocation(worldIn.provider.getDimension(), position));
 	}
 
 	public static int generateNewTardisDim() {

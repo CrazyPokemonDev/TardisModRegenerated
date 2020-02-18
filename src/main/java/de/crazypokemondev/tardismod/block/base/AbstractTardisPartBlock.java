@@ -1,8 +1,9 @@
 package de.crazypokemondev.tardismod.block.base;
 
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
-import de.crazypokemondev.tardismod.api.ITardisLocationCapability;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
+import de.crazypokemondev.tardismod.util.TardisLocation;
+import de.crazypokemondev.tardismod.util.TardisModData;
 import de.crazypokemondev.tardismod.util.helpers.MessageHelper;
 import de.crazypokemondev.tardismod.util.helpers.TardisHelper;
 import de.crazypokemondev.tardismod.util.helpers.Teleport;
@@ -27,8 +28,6 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 
 	@CapabilityInject(ITardisIdentificationCapability.class)
 	static Capability<ITardisIdentificationCapability> TARDIS_IDENTIFICATION_CAPABILITY = null;
-	@CapabilityInject(ITardisLocationCapability.class)
-	static Capability<ITardisLocationCapability> TARDIS_LOCATION_CAPABILITY = null;
 
 	public AbstractTardisPartBlock() {
 		super(Material.IRON);
@@ -56,27 +55,26 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		/*
-		 * if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
-		 * MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_DOORS_LOCKED);
-		 */
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (!(te instanceof TileEntityTardis)) {
+			TileEntityTardis te = getTardisTileEntity(worldIn, pos);
+			if (te == null) {
 				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 			}
 			TileEntityTardis tardis = (TileEntityTardis) te;
 			ITardisIdentificationCapability tardisCap = tardis.getCapability(TARDIS_IDENTIFICATION_CAPABILITY, facing);
 			if (!tardisCap.hasTardis()) {
+				// this TARDIS hasn't been connected to a dimension yet
 				ITardisIdentificationCapability playerCap = playerIn.getCapability(TARDIS_IDENTIFICATION_CAPABILITY,
 						null);
 				if (!playerCap.hasTardis()) {
+					// this player hasn't been connected to a dimension, either
 					int dimensionId = TardisHelper.generateNewTardisDim();
 					playerCap.setTardisDimensionId(dimensionId);
 				}
-				ITardisLocationCapability locationCap = worldIn.getCapability(TARDIS_LOCATION_CAPABILITY, null);
 				int dimensionId = playerCap.getTardisDimensionId();
-				if (locationCap.isMaterialized(dimensionId) && !locationCap.getLocation(dimensionId).equals(pos)) {
+				if (TardisModData.get(worldIn).exists(dimensionId) && !TardisModData.get(worldIn)
+						.getLocation(dimensionId).equals(new TardisLocation(worldIn, te.getPos()))) {
+					// the player already has a TARDIS and therefore can't claim this one
 					MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_DOORS_LOCKED);
 					return false;
 				}
@@ -87,6 +85,17 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 			return true;
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+	}
+
+	private TileEntityTardis getTardisTileEntity(World worldIn, BlockPos pos) {
+		TileEntity te = worldIn.getTileEntity(pos);
+		if (!(te instanceof TileEntityTardis)) {
+			te = worldIn.getTileEntity(pos.down());
+		}
+		if (!(te instanceof TileEntityTardis)) {
+			return null;
+		}
+		return (TileEntityTardis) te;
 	}
 
 }
