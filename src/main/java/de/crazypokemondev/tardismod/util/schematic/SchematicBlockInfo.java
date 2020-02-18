@@ -4,8 +4,11 @@ import org.apache.commons.compress.archivers.dump.InvalidFormatException;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.init.ModBlocks;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants.NBT;
 
@@ -26,6 +29,29 @@ public class SchematicBlockInfo {
 
 	public IBlockState getBlockState() {
 		return blockState;
+	}
+
+	public IBlockState getBlockState(Rotation rotation) {
+		if (blockState.getPropertyKeys().contains(BlockHorizontal.FACING)) {
+			return blockState.withProperty(BlockHorizontal.FACING,
+					rotate(blockState.getValue(BlockHorizontal.FACING), rotation));
+		}
+		return blockState;
+	}
+
+	private EnumFacing rotate(EnumFacing value, Rotation rotation) {
+		switch (rotation) {
+			case NONE:
+				return value;
+			case CLOCKWISE_90:
+				return value.rotateY();
+			case CLOCKWISE_180:
+				return value.getOpposite();
+			case COUNTERCLOCKWISE_90:
+				return value.rotateYCCW();
+			default:
+				throw new RuntimeException("Illegal rotation supplied");
+		}
 	}
 
 	public static SchematicBlockInfo loadFromNbt(BlockPos blockPos, NBTTagCompound nbt) throws InvalidFormatException {
