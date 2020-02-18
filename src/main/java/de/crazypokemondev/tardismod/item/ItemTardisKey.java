@@ -9,7 +9,6 @@ import de.crazypokemondev.tardismod.util.TardisModData;
 import de.crazypokemondev.tardismod.util.helpers.CalculationHelper;
 import de.crazypokemondev.tardismod.util.helpers.MessageHelper;
 import de.crazypokemondev.tardismod.util.helpers.TardisHelper;
-import net.minecraft.block.BlockAir;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -117,7 +116,6 @@ public class ItemTardisKey extends Item {
 	}
 
 	private boolean isFreePositionAndAbove(BlockPos tryPos, World worldIn) {
-		return worldIn.getBlockState(tryPos).getBlock() instanceof BlockAir
-				&& worldIn.getBlockState(tryPos.up()).getBlock() instanceof BlockAir;
+		return worldIn.isAirBlock(tryPos) && worldIn.isAirBlock(tryPos.up());
 	}
 }
