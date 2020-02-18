@@ -24,32 +24,35 @@ public class TardisMod {
 	public static final String VERSION = "0.0.1";
 	public static final String MC_VERSION = "[1.12.2]";
 	public static File SCHEMA_DIR;
+	public static File CONFIG_DIR;
 
 	public static final Logger LOGGER = LogManager.getLogger(TardisMod.MODID);
-	
-	public static final CreativeTabs CREATIVE_TAB = new TardisModTab();	
+
+	public static final CreativeTabs CREATIVE_TAB = new TardisModTab();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		RegistrationHandler.registerCapabilities();
-		RegistrationHandler.registerTileEntities();
-		
-		// enable OBJ models for rendering
-		OBJLoader.INSTANCE.addDomain(MODID);
-		
 		// Create Schema directory for TARDIS interior
+		CONFIG_DIR = new File(event.getModConfigurationDirectory(), "tardismod");
+		CONFIG_DIR.mkdirs();
 		SCHEMA_DIR = new File(event.getModConfigurationDirectory(), "tardismod_schemas/");
 		SCHEMA_DIR.mkdirs();
+		
+		RegistrationHandler.registerCapabilities();
+		RegistrationHandler.registerTileEntities();
+
+		// enable OBJ models for rendering
+		OBJLoader.INSTANCE.addDomain(MODID);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		
+
 	}
 
 }

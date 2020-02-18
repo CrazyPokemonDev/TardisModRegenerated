@@ -58,11 +58,11 @@ public class SchematicBlockInfo {
 			case "TardisMod:tile.TardisMod.SchemaComponent":
 				return getSchemaComponentState(meta);
 			case "TardisMod:tile.TardisMod.InternalDoor":
-				return ModBlocks.DOOR.getDefaultState();
+				return ModBlocks.DOOR.getStateFromMeta(meta);
 			case "TardisMod:tile.TardisMod.ForceField":
 				return ModBlocks.SOLID_FORCE_FIELD.getDefaultState();
 			case "TardisMod:tile.TardisMod.Slab":
-				return ModBlocks.CORRIDOR_SLAB.getDefaultState();
+				return ModBlocks.CORRIDOR_SLAB_HALF.getStateFromMeta(meta);
 			// TODO: add other schema blocks that I might be missing now
 			default:
 				TardisMod.LOGGER.error("Can't find a block for name " + name);

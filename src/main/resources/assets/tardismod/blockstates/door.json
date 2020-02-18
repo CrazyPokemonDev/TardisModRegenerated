@@ -6,6 +6,7 @@
     "variants": {
         "normal": [{}],
         "inventory": [{}],
-        "primary": { "true": { "model": "tardismod:door_primary" }, "false": {} }
+        "primary": { "true": { "model": "tardismod:door_primary" }, "false": {} },
+        "facing": { "west": {}, "north": {}, "east": {}, "south": {} }
     }
 }

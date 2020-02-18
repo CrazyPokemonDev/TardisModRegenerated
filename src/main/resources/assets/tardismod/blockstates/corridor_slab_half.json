@@ -9,6 +9,9 @@
         "half": {
         	"top": { "model": "tardismod:corridor_slab_top" },
         	"bottom": { "model": "tardismod:corridor_slab_bottom" }
+        },
+        "variant": {
+        	"default": {}
         }
     }
 }

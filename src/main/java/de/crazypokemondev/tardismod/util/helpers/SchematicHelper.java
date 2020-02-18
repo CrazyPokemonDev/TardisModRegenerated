@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.commons.compress.archivers.dump.InvalidFormatException;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.Level;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import de.crazypokemondev.tardismod.util.schematic.Schematic;
@@ -40,8 +41,7 @@ public class SchematicHelper {
 			TardisMod.LOGGER.error("Couldn't load schematic with name " + name);
 			return null;
 		} catch (IOException e) {
-			TardisMod.LOGGER.error(e.toString());
-			e.printStackTrace();
+			TardisMod.LOGGER.catching(Level.ERROR, e);
 			return null;
 		}
 	}
@@ -54,8 +54,7 @@ public class SchematicHelper {
 				Files.copy(stream, schema.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				IOUtils.closeQuietly(stream);
 			} catch (IOException e) {
-				TardisMod.LOGGER.error(e.toString());
-				e.printStackTrace();
+				TardisMod.LOGGER.catching(Level.ERROR, e);
 			}
 		}
 		return schema;
