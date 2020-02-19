@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import de.crazypokemondev.tardismod.TardisMod;
+import de.crazypokemondev.tardismod.api.ISonicScrewdriverCapability;
 import de.crazypokemondev.tardismod.api.ITardisIdentificationCapability;
 import de.crazypokemondev.tardismod.block.BlockConsole;
 import de.crazypokemondev.tardismod.block.BlockControlPanel;
@@ -23,10 +24,13 @@ import de.crazypokemondev.tardismod.block.BlockTemporalEngine;
 import de.crazypokemondev.tardismod.block.BlockTimeRotor;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityCore;
+import de.crazypokemondev.tardismod.block.tileentities.TileEntityRoundel;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
 import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
 import de.crazypokemondev.tardismod.util.TardisModData;
+import de.crazypokemondev.tardismod.util.capabilities.CapabilityMockStorage;
+import de.crazypokemondev.tardismod.util.capabilities.SonicScrewdriverFactory;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationFactory;
 import de.crazypokemondev.tardismod.util.capabilities.TardisIdentificationStorage;
 import de.crazypokemondev.tardismod.worldgen.BiomeTardisInterior;
@@ -56,6 +60,8 @@ public final class RegistrationHandler {
 	private static final ResourceLocation TARDIS_TILE_ENTITY = new ResourceLocation(TardisMod.MODID,
 			"tardisTileEntity");
 	private static final ResourceLocation CORE_TILE_ENTITY = new ResourceLocation(TardisMod.MODID, "coreTileEntity");
+	private static final ResourceLocation ROUNDEL_TILE_ENTITY = new ResourceLocation(TardisMod.MODID,
+			"roundelTileEntity");
 
 	private static List<Item> registerInventoryVariant = new ArrayList<Item>();
 
@@ -145,11 +151,18 @@ public final class RegistrationHandler {
 	public static void registerCapabilities() {
 		CapabilityManager.INSTANCE.register(ITardisIdentificationCapability.class, new TardisIdentificationStorage(),
 				new TardisIdentificationFactory());
+		CapabilityManager.INSTANCE.register(ISonicScrewdriverCapability.class,
+				new CapabilityMockStorage<ISonicScrewdriverCapability>(), new SonicScrewdriverFactory());
 	}
 
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, TARDIS_TILE_ENTITY);
 		GameRegistry.registerTileEntity(TileEntityCore.class, CORE_TILE_ENTITY);
+		GameRegistry.registerTileEntity(TileEntityRoundel.class, ROUNDEL_TILE_ENTITY);
+	}
+
+	public static void bindTileEntitySpecialRenderers() {
+
 	}
 
 	@SubscribeEvent

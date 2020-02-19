@@ -40,6 +40,7 @@ public class TardisMod {
 
 		RegistrationHandler.registerCapabilities();
 		RegistrationHandler.registerTileEntities();
+		RegistrationHandler.bindTileEntitySpecialRenderers();
 
 		// enable OBJ models for rendering
 		OBJLoader.INSTANCE.addDomain(MODID);

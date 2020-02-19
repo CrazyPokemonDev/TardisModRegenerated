@@ -27,7 +27,8 @@ public class CapabilityHandler {
 
 	@SubscribeEvent
 	public static void attachTileEntityCapabilities(AttachCapabilitiesEvent<TileEntity> event) {
-		if (event.getObject() instanceof TileEntityTardis) {
+		TileEntity object = event.getObject();
+		if (object instanceof TileEntityTardis) {
 			event.addCapability(TARDIS_ID_CAP, new TardisIdentificationCapabilityProvider());
 		}
 	}

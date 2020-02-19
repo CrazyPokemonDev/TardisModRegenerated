@@ -1,8 +1,21 @@
 package de.crazypokemondev.tardismod.api;
 
-public enum ScrewdriverMode {
+import net.minecraft.util.IStringSerializable;
+
+public enum ScrewdriverMode implements IStringSerializable {
 	SCHEMATIC,
 	RECONFIGURE,
 	DISMANTLE,
-	LINK
+	LINK;
+	
+	public static final ScrewdriverMode DEFAULT = RECONFIGURE;
+	
+	public static ScrewdriverMode getDefault() {
+		return RECONFIGURE;
+	}
+
+	@Override
+	public String getName() {
+		return this.name();
+	}
 }
