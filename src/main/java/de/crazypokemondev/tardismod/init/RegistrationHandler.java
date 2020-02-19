@@ -22,6 +22,7 @@ import de.crazypokemondev.tardismod.block.BlockTardisTop;
 import de.crazypokemondev.tardismod.block.BlockTemporalEngine;
 import de.crazypokemondev.tardismod.block.BlockTimeRotor;
 import de.crazypokemondev.tardismod.block.TardisInternalBlock;
+import de.crazypokemondev.tardismod.block.tileentities.TileEntityCore;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
 import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
@@ -54,6 +55,7 @@ public final class RegistrationHandler {
 
 	private static final ResourceLocation TARDIS_TILE_ENTITY = new ResourceLocation(TardisMod.MODID,
 			"tardisTileEntity");
+	private static final ResourceLocation CORE_TILE_ENTITY = new ResourceLocation(TardisMod.MODID, "coreTileEntity");
 
 	private static List<Item> registerInventoryVariant = new ArrayList<Item>();
 
@@ -145,14 +147,14 @@ public final class RegistrationHandler {
 
 	public static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityTardis.class, TARDIS_TILE_ENTITY);
+		GameRegistry.registerTileEntity(TileEntityCore.class, CORE_TILE_ENTITY);
 	}
 
 	@SubscribeEvent
 	public static void loadWorld(WorldEvent.Load event) {
 		World world = event.getWorld();
 		// register dimension for every TARDIS in this world
-		TardisMod.LOGGER
-				.info("Loading TARDIS dimensions associated to world " + world.provider.getDimension());
+		TardisMod.LOGGER.info("Loading TARDIS dimensions associated to world " + world.provider.getDimension());
 		Set<Integer> dimIds = TardisModData.get(world).getAllLocations().keySet();
 		for (int dimId : dimIds) {
 			if (!DimensionManager.isDimensionRegistered(dimId)) {

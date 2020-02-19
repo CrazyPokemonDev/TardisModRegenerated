@@ -29,6 +29,10 @@ public class TardisModData extends WorldSavedData {
 	public TardisModData() {
 		super(DATA_NAME);
 	}
+	
+	public TardisModData(String name) {
+		super(name);
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

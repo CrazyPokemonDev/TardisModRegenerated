@@ -37,7 +37,7 @@ public class TardisMod {
 		CONFIG_DIR.mkdirs();
 		SCHEMA_DIR = new File(event.getModConfigurationDirectory(), "tardismod_schemas/");
 		SCHEMA_DIR.mkdirs();
-		
+
 		RegistrationHandler.registerCapabilities();
 		RegistrationHandler.registerTileEntities();
 
