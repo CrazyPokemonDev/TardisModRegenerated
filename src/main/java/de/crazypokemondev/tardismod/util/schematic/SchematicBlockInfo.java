@@ -101,7 +101,7 @@ public class SchematicBlockInfo {
 			case 2:
 				return ModBlocks.CONTROL_PANEL.getDefaultState();
 			case 3:
-				return ModBlocks.CONSOLE.getDefaultState();
+				return ModBlocks.CONSOLE_DECO.getDefaultState();
 			case 4:
 				return ModBlocks.EXIT_BOTTOM.getDefaultState();
 			case 5:
@@ -109,7 +109,7 @@ public class SchematicBlockInfo {
 			case 6:
 				return ModBlocks.CONSOLE.getDefaultState();
 			case 7:
-				return ModBlocks.TEMPORAL_ENGINE.getDefaultState();
+				return ModBlocks.TEMPORAL_ENGINE_DECO.getDefaultState();
 			case 8:
 				return ModBlocks.TIME_ROTOR.getDefaultState();
 			case 0:

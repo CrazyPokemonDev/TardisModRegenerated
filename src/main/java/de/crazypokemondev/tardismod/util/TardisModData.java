@@ -5,6 +5,7 @@ import java.util.Map;
 
 import de.crazypokemondev.tardismod.TardisMod;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
@@ -24,12 +25,14 @@ public class TardisModData extends WorldSavedData {
 
 	private static final String DIMENSION = "dimension";
 
+	private static final String FACING = "facing";
+
 	private Map<Integer, TardisLocation> tardises = new HashMap<Integer, TardisLocation>();
 
 	public TardisModData() {
 		super(DATA_NAME);
 	}
-	
+
 	public TardisModData(String name) {
 		super(name);
 	}
@@ -47,7 +50,8 @@ public class TardisModData extends WorldSavedData {
 
 	private TardisLocation getLocationFromTag(NBTTagCompound position) {
 		return new TardisLocation(position.getInteger(DIMENSION),
-				new BlockPos(position.getInteger(X), position.getInteger(Y), position.getInteger(Z)));
+				new BlockPos(position.getInteger(X), position.getInteger(Y), position.getInteger(Z)),
+				EnumFacing.getHorizontal(position.getInteger(FACING)));
 	}
 
 	@Override
@@ -68,6 +72,7 @@ public class TardisModData extends WorldSavedData {
 		tagCompound.setInteger(Y, location.getPosition().getY());
 		tagCompound.setInteger(Z, location.getPosition().getZ());
 		tagCompound.setInteger(DIMENSION, location.getDimensionId());
+		tagCompound.setInteger(FACING, location.getFacing().getHorizontalIndex());
 		return tagCompound;
 	}
 

@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -44,5 +45,16 @@ public class Teleport extends Teleporter {
 				new Teleport(worldServer, x, y, z));
 		player.setPositionAndRotation(x, y, z, yaw, pitch);
 		player.setPositionAndUpdate(x, y, z);
+	}
+
+	public static void teleportToDimension(EntityPlayer player, int dimension, BlockPos blockPos, float yaw,
+			float pitch) {
+		teleportToDimension(player, dimension, blockPos.getX() + 0.5, blockPos.getY(), blockPos.getZ() + 0.5, yaw, pitch);
+	}
+
+	public static void teleportToDimension(EntityPlayer playerIn, int dimensionId, BlockPos position, EnumFacing facing,
+			int pitch) {
+		int yaw = facing.getHorizontalIndex() * 90;
+		teleportToDimension(playerIn, dimensionId, position, yaw, pitch);
 	}
 }
