@@ -16,7 +16,7 @@ public class TardisHelper {
 		worldIn.setBlockState(position,
 				ModBlocks.TARDIS.getDefaultState().withProperty(BlockHorizontal.FACING, facing));
 		TardisModData.get(worldIn).setLocation(tardisDimensionId,
-				new TardisLocation(worldIn.provider.getDimension(), position));
+				new TardisLocation(worldIn.provider.getDimension(), position, facing));
 	}
 
 	public static int generateNewTardisDim() {

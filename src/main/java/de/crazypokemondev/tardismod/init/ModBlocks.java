@@ -25,9 +25,11 @@ public class ModBlocks {
 	public static final BlockTardis TARDIS = null;
 	public static final BlockTardisTop TARDIS_TOP = null;
 	public static final BlockConsole CONSOLE = null;
+	public static final TardisInternalBlock CONSOLE_DECO = null;
 	public static final BlockTimeRotor TIME_ROTOR = null;
 	public static final BlockTardisCore TARDIS_CORE = null;
 	public static final BlockTemporalEngine TEMPORAL_ENGINE = null;
+	public static final TardisInternalBlock TEMPORAL_ENGINE_DECO = null;
 
 	public static final TardisInternalBlock SOLID_BLOCK = null;
 	public static final TardisInternalBlock FLAT_BLOCK = null;

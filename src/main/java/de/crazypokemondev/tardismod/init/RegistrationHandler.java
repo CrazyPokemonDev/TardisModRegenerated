@@ -70,8 +70,10 @@ public final class RegistrationHandler {
 				createBlock(new BlockSolidGravityLift(), "solid_gravity_lift"),
 				createBlock(new TardisInternalBlock(), "door_connector"), createBlock(new BlockExit(), "exit_top"),
 				createBlock(new BlockExit(), "exit_bottom"), createBlock(new BlockConsole(), "console"),
-				createBlock(new BlockTimeRotor(), "time_rotor"), createBlock(new BlockTardisCore(), "tardis_core"),
+				createBlock(new TardisInternalBlock(), "console_deco"), createBlock(new BlockTimeRotor(), "time_rotor"),
+				createBlock(new BlockTardisCore(), "tardis_core"),
 				createBlock(new BlockTemporalEngine(), "temporal_engine"),
+				createBlock(new TardisInternalBlock(), "temporal_engine_deco"),
 				createBlock(new BlockControlPanel(), "control_panel"), createBlock(new BlockSchema(), "schema"),
 				createBlock(new BlockCorridorSlab.Half(), "corridor_slab_half"),
 				createBlock(new BlockCorridorSlab.Double(), "corridor_slab_double") };

@@ -66,6 +66,8 @@ public class ChunkGeneratorTardis implements IChunkGenerator {
 
 		if (chunkX == 0 && chunkZ == 0) {
 			world.setBlockState(new BlockPos(0, 70, 0), ModBlocks.TARDIS_CORE.getDefaultState());
+			world.setBlockState(new BlockPos(0, 68, 0), ModBlocks.CONSOLE.getDefaultState());
+			world.setBlockState(new BlockPos(0, 65, 0), ModBlocks.TEMPORAL_ENGINE.getDefaultState());
 		}
 	}
 

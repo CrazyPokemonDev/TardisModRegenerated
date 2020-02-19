@@ -72,8 +72,9 @@ public abstract class AbstractTardisPartBlock extends AbstractDirectionalBlock {
 					playerCap.setTardisDimensionId(dimensionId);
 				}
 				int dimensionId = playerCap.getTardisDimensionId();
-				if (TardisModData.get(worldIn).exists(dimensionId) && !TardisModData.get(worldIn)
-						.getLocation(dimensionId).equals(new TardisLocation(worldIn, te.getPos()))) {
+				if (TardisModData.get(worldIn).exists(dimensionId)
+						&& !TardisModData.get(worldIn).getLocation(dimensionId)
+								.equals(new TardisLocation(worldIn, te.getPos(), state.getValue(FACING)))) {
 					// the player already has a TARDIS and therefore can't claim this one
 					MessageHelper.sendLocalizedMessage(playerIn, worldIn, TARDIS_DOORS_LOCKED);
 					return false;
