@@ -58,9 +58,14 @@ public class ChunkGeneratorTardis implements IChunkGenerator {
 			world.setBlockState(CONSOLE_SCHEMA_CORE_POS.add(block.getPosition()), block.getBlockState());
 		}
 		BlockPos primaryDoorPos = CONSOLE_SCHEMA_CORE_POS.add(consoleRoom.getPrimaryDoor());
+
 		if (primaryDoorPos.getX() < (chunkX + 1) * 16 && primaryDoorPos.getX() >= chunkX * 16
 				&& primaryDoorPos.getZ() < (chunkZ + 1) * 16 && primaryDoorPos.getZ() >= chunkZ * 16) {
 			world.setBlockState(primaryDoorPos, ModBlocks.DOOR.getDefaultState().withProperty(BlockDoor.PRIMARY, true));
+		}
+
+		if (chunkX == 0 && chunkZ == 0) {
+			world.setBlockState(new BlockPos(0, 70, 0), ModBlocks.TARDIS_CORE.getDefaultState());
 		}
 	}
 
