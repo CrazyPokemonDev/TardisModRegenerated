@@ -13,4 +13,11 @@ public class MessageHelper {
 		}
 	}
 
+	public static void sendLocalizedToast(EntityPlayer playerIn, World worldIn,
+			TextComponentTranslation text) {
+		if (!worldIn.isRemote) {
+			playerIn.sendStatusMessage(text, true);
+		}
+	}
+
 }

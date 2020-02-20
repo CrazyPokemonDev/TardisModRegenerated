@@ -16,11 +16,59 @@
 		}
 	},
 	"variants": {
-		"inventory": [
+		"dismantle": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/red"
+				}
+			}
+		],
+		"link": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/brown"
+				}
+			}
+		],
+		"reconfigure": [
 			{
 				"submodel": "tardismod:screwlight/screwlight.obj",
 				"textures": {
 					"#None.001": "tardismod:items/screwlight/blue"
+				}
+			}
+		],
+		"schematic": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/yellow"
+				}
+			}
+		],
+		"transmat": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/purple"
+				}
+			}
+		],
+		"locate": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/green"
+				}
+			}
+		],
+		"recall": [
+			{
+				"submodel": "tardismod:screwlight/screwlight.obj",
+				"textures": {
+					"#None.001": "tardismod:items/screwlight/orange"
 				}
 			}
 		]

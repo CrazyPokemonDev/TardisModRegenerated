@@ -110,7 +110,7 @@ public final class RegistrationHandler {
 		event.getRegistry().registerAll(itemBlocks);
 
 		// register inventory variant for obj models of items
-		registerInventoryVariant.add(sonicScrewdriver);
+		// registerInventoryVariant.add(sonicScrewdriver);
 	}
 
 	private static Item createItem(Item item, String name) {
@@ -137,6 +137,9 @@ public final class RegistrationHandler {
 			ModelLoader.setCustomModelResourceLocation(item, 0,
 					new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
+		
+		ModelLoader.registerItemVariants(ModItems.SONIC_SCREWDRIVER, ModItems.SONIC_SCREWDRIVER.getItemVariants());
+		ModelLoader.setCustomMeshDefinition(ModItems.SONIC_SCREWDRIVER, ModItems.SONIC_SCREWDRIVER);
 	}
 
 	@SubscribeEvent

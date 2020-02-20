@@ -25,3 +25,15 @@ itemGroup.tardismod=Tardis Mod
 messages.tardismod.tardis_cant_spawn_no_space=There's not enough room for the TARDIS to land here!
 messages.tardismod.tardis_spawn_successful=The key feels warm in your hand.
 messages.tardismod.tardis_doors_locked=The door of the TARDIS seems to be mysteriously locked.
+
+# Tooltips
+tardismod.screwdriver.tooltip.dismantle=Dismantle
+tardismod.screwdriver.tooltip.link=Link
+tardismod.screwdriver.tooltip.schematic=Schematic
+tardismod.screwdriver.tooltip.reconfigure=Reconfigure
+#purple
+tardismod.screwdriver.tooltip.transmat=Transmat
+#green
+tardismod.screwdriver.tooltip.locate=Locate
+#orange
+tardismod.screwdriver.tooltip.recall=Recall
