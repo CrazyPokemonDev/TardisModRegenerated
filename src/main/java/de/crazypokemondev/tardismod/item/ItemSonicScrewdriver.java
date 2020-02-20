@@ -4,8 +4,6 @@ import de.crazypokemondev.tardismod.api.ISonicScrewdriverCapability;
 import de.crazypokemondev.tardismod.api.ScrewdriverMode;
 import de.crazypokemondev.tardismod.util.helpers.MessageHelper;
 import de.crazypokemondev.tardismod.util.helpers.ScrewdriverHelper;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,13 +12,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-public class ItemSonicScrewdriver extends Item implements ItemMeshDefinition {	
+public class ItemSonicScrewdriver extends Item {	
 	@CapabilityInject(ISonicScrewdriverCapability.class)
 	static Capability<ISonicScrewdriverCapability> SONIC_SCREWDRIVER_CAPABILITY = null;
 	
@@ -51,22 +48,5 @@ public class ItemSonicScrewdriver extends Item implements ItemMeshDefinition {
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, screwdriver);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
-	}
-
-	@Override
-	public ModelResourceLocation getModelLocation(ItemStack stack) {
-		ScrewdriverMode mode = ScrewdriverHelper.getMode(stack);
-		ModelResourceLocation location = new ModelResourceLocation(this.getRegistryName(), mode.getName());
-		return location;
-	}
-
-	public ResourceLocation[] getItemVariants() {
-		ScrewdriverMode[] values = ScrewdriverMode.values();
-		int count = values.length;
-		ResourceLocation[] result = new ResourceLocation[count];
-		for (int i = 0; i < count; i++) {
-			result[i] = new ModelResourceLocation(this.getRegistryName(), values[i].getName());
-		}
-		return result;
 	}
 }

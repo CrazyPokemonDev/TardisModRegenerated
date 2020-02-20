@@ -26,6 +26,7 @@ import de.crazypokemondev.tardismod.block.TardisInternalBlock;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityCore;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityRoundel;
 import de.crazypokemondev.tardismod.block.tileentities.TileEntityTardis;
+import de.crazypokemondev.tardismod.client.models.ScrewdriverCustomMesh;
 import de.crazypokemondev.tardismod.item.ItemSonicScrewdriver;
 import de.crazypokemondev.tardismod.item.ItemTardisKey;
 import de.crazypokemondev.tardismod.util.TardisModData;
@@ -52,6 +53,8 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber(modid = TardisMod.MODID)
@@ -132,14 +135,15 @@ public final class RegistrationHandler {
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public static void registerModels(ModelRegistryEvent event) {
 		for (Item item : registerInventoryVariant) {
 			ModelLoader.setCustomModelResourceLocation(item, 0,
 					new ModelResourceLocation(item.getRegistryName(), "inventory"));
 		}
-		
-		ModelLoader.registerItemVariants(ModItems.SONIC_SCREWDRIVER, ModItems.SONIC_SCREWDRIVER.getItemVariants());
-		ModelLoader.setCustomMeshDefinition(ModItems.SONIC_SCREWDRIVER, ModItems.SONIC_SCREWDRIVER);
+
+		ModelLoader.registerItemVariants(ModItems.SONIC_SCREWDRIVER, ScrewdriverCustomMesh.getItemVariants());
+		ModelLoader.setCustomMeshDefinition(ModItems.SONIC_SCREWDRIVER, new ScrewdriverCustomMesh());
 	}
 
 	@SubscribeEvent
@@ -165,18 +169,20 @@ public final class RegistrationHandler {
 	}
 
 	public static void bindTileEntitySpecialRenderers() {
-		
+
 	}
 
 	@SubscribeEvent
 	public static void loadWorld(WorldEvent.Load event) {
 		World world = event.getWorld();
 		// register dimension for every TARDIS in this world
-		TardisMod.LOGGER.info("Loading TARDIS dimensions associated to world " + world.provider.getDimension());
-		Set<Integer> dimIds = TardisModData.get(world).getAllLocations().keySet();
-		for (int dimId : dimIds) {
-			if (!DimensionManager.isDimensionRegistered(dimId)) {
-				DimensionManager.registerDimension(dimId, ModWorldGen.TARDIS_DIM_TYPE);
+		if (!world.isRemote) {
+			TardisMod.LOGGER.info("Loading TARDIS dimensions associated to world " + world.provider.getDimension());
+			Set<Integer> dimIds = TardisModData.get(world).getAllLocations().keySet();
+			for (int dimId : dimIds) {
+				if (!DimensionManager.isDimensionRegistered(dimId)) {
+					DimensionManager.registerDimension(dimId, ModWorldGen.TARDIS_DIM_TYPE);
+				}
 			}
 		}
 	}
