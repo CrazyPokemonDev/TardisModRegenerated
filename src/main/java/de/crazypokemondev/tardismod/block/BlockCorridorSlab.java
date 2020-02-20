@@ -10,9 +10,16 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public abstract class BlockCorridorSlab extends BlockSlab {
 	public static final PropertyEnum<Variant> VARIANT = PropertyEnum.<Variant>create("variant", Variant.class);
@@ -50,7 +57,7 @@ public abstract class BlockCorridorSlab extends BlockSlab {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ModBlocks.CORRIDOR_SLAB_HALF.getItemDropped(state, rand, fortune);
+		return Item.getItemFromBlock(ModBlocks.CORRIDOR_SLAB_HALF);
 	}
 
 	@Override
@@ -109,5 +116,19 @@ public abstract class BlockCorridorSlab extends BlockSlab {
 			return false;
 		}
 
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+		return !(entity instanceof EntityWither) && !(entity instanceof EntityWitherSkull);
+	}
+
+	@Override
+	public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+	}
+
+	@Override
+	public boolean canDropFromExplosion(Explosion explosion) {
+		return false;
 	}
 }

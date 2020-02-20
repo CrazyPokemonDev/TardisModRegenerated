@@ -165,7 +165,7 @@ public final class RegistrationHandler {
 	}
 
 	public static void bindTileEntitySpecialRenderers() {
-
+		
 	}
 
 	@SubscribeEvent

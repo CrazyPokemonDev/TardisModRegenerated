@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "model": "tardismod:corridor_slab"
+        "model": "tardismod:corridor_slab_bottom"
     },
     "variants": {
         "normal": [{}],
